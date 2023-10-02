@@ -2,6 +2,7 @@ package utils
 
 import (
 	"flag"
+	v1 "github.com/spotahome/redis-operator/api/redisfailover/v1"
 	"path/filepath"
 
 	"github.com/spotahome/redis-operator/operator/redisfailover"
@@ -19,6 +20,9 @@ type CMDFlags struct {
 	K8sQueriesBurstable int
 	Concurrency         int
 	LogLevel            string
+	DefaultRedisImage            string
+	DefaultRedisExporterImage    string
+	DefaultSentinelExporterImage string
 }
 
 // Init initializes and parse the flags
@@ -35,6 +39,9 @@ func (c *CMDFlags) Init() {
 	// reference: https://github.com/spotahome/kooper/blob/master/controller/controller.go#L89
 	flag.IntVar(&c.Concurrency, "concurrency", 3, "Number of conccurent workers meant to process events")
 	flag.StringVar(&c.LogLevel, "log-level", "info", "set log level")
+	flag.StringVar(&c.DefaultRedisImage, "redis-default-image", v1.DefaultImage, "default redis image")
+	flag.StringVar(&c.DefaultRedisExporterImage, "rfr-exporter-default-image", v1.DefaultExporterImage, "default redis exporter image")
+	flag.StringVar(&c.DefaultSentinelExporterImage, "rfs-exporter-default-image", v1.DefaultSentinelExporterImage, "default sentinel exporter image")
 	// Parse flags
 	flag.Parse()
 }
@@ -46,4 +53,11 @@ func (c *CMDFlags) ToRedisOperatorConfig() redisfailover.Config {
 		MetricsPath:   c.MetricsPath,
 		Concurrency:   c.Concurrency,
 	}
+}
+
+// ReinitiliazeDefaults redefine default values overridden by flags
+func (c *CMDFlags) ReinitiliazeDefaults() {
+	v1.DefaultImage = c.DefaultRedisImage
+	v1.DefaultExporterImage = c.DefaultRedisExporterImage
+	v1.DefaultSentinelExporterImage = c.DefaultSentinelExporterImage
 }
