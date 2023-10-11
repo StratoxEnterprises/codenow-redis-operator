@@ -1,10 +1,10 @@
 annotations:
   category: Redis Operator
-appVersion: 1.2.4
+appVersion: ${project.version}
 apiVersion: v1
 description: A Helm chart for the Spotahome Redis Operator
-name: redis-operator
-version: 3.2.6
+name: codenow-redis-operator
+version: ${project.version}
 home: https://github.com/spotahome/redis-operator
 keywords:
   - "golang"

@@ -4,9 +4,9 @@
 
 # Name of the image repository to pull the container image from.
 image:
-  repository: quay.io/spotahome/redis-operator
+  repository: codenow-codenow-data-plane-hosted-docker.jfrog.io/codenow/codenow-redis-operator
   pullPolicy: IfNotPresent
-  tag: v1.2.4
+  tag: ${project.version}
   cli_args: []
 
 imageCredentials:
