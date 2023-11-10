@@ -6,6 +6,7 @@ const (
 	defaultRedisPort      = 6379
 	HealthyState          = "Healthy"
 	NotHealthyState       = "NotHealthy"
+	ProgressingState      = "Progressing"
 )
 
 var (

@@ -121,7 +121,7 @@ func TestValidate(t *testing.T) {
 						BootstrapNode: test.expectedBootstrapNode,
 					},
 					Status: RedisFailoverStatus{
-						State:       HealthyState,
+						State:       "",
 						LastChanged: "",
 						Message:     "",
 					},

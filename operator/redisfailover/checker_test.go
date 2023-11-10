@@ -421,7 +421,7 @@ func TestCheckAndHeal(t *testing.T) {
 
 			if expErr {
 				assert.Error(err)
-				assert.Equal(v1.NotHealthyState, rf.Status.State)
+				assert.Equal(v1.ProgressingState, rf.Status.State)
 			} else {
 				assert.NoError(err)
 				assert.Equal(v1.HealthyState, rf.Status.State)
